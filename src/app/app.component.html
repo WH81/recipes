@@ -1,0 +1,32 @@
+<div class="title">
+  <h1>Create a recipe</h1>
+</div>
+
+<form [formGroup]="recipe" (ngSubmit)="onSubmit(recipe.value)">
+  <div>
+    <label>
+      Title:
+      <input
+        #box
+        type="text"
+        formControlName="title"
+        name="title"
+        minlength="2"
+        placeholder="Enter recipe title"
+      />
+    </label>
+    <div
+      *ngIf="
+        recipe.get('title').invalid &&
+        (recipe.get('title').dirty || recipe.get('title').touched)
+      "
+    >
+      Please provide a valid title. Need at least two characters.
+    </div>
+  </div>
+  <button type="submit" [disabled]="recipe.invalid" (click)="getValue(box.value)">Save</button>
+</form>
+
+<h2 class="value">
+  {{ displayVal }}
+</h2>
